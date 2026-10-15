@@ -16,11 +16,16 @@ and remaining blockers are recorded in [submission.md](submission.md).
 - [x] CI and pull request template are provided.
 - [x] Mordecai's original commits and subsequent main update are preserved.
 - [x] Michael's AI-assisted integration branch is pushed under miikese.
-- [x] [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2) is open for genuine partner review.
+- [x] [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2) is merged at Michael's request after passing checks; no partner approval is claimed.
 - [x] Mordecai's [PR #1](https://github.com/mordecai12-cool/campusflow2/pull/1) exists and is merged; its diff only removes cache files.
-- [x] Current main commit 3f068e38d4bf478033415c79b22e18ea11275093 tested: 15 unittest tests pass.
+- [x] Historical baseline main commit 3f068e38d4bf478033415c79b22e18ea11275093 tested: 15 unittest tests pass.
 - [x] Extra contract probes run on main and integration: main fails five requirements; integration passes all seven probes.
 - [x] Two concrete assistant review observations per PR are prepared with reproducible evidence.
+- [x] PR #2 merged main 7fa245cf13e8567557f3dbd9e5cdec8aa9b38b18 tested: all 66 tests, syntax checks and demo pass.
+- [x] Actual campus engineer folders, matching tests, CLI, persistence and demo integrated; original API preserved.
+- [x] All 95 combined tests and seven independent contract probes pass on the source-integration implementation.
+- [x] Proposed ID/lifecycle refactors and two meaningful regression scenarios implemented; all 97 branch tests pass.
+- [x] Contribution provenance and exact partner review instructions prepared without claiming personal authorship or approval.
 - [ ] Both partners confirm the role map and record actual design agreement.
 - [ ] Michael provides personally authored application code and matching tests.
 - [ ] Both partners identify their actual contributions and AI assistance accurately.

@@ -5,7 +5,9 @@ Repository: https://github.com/mordecai12-cool/campusflow2
 | PR | Author | Verified state | Evidence limitation |
 | --- | --- | --- | --- |
 | [#1 Complete CampusFlow helpdesk system](https://github.com/mordecai12-cool/campusflow2/pull/1) | mordecai12-cool | Merged into main by miikese; no recorded reviews | The diff deletes five cache files. Application and tests were already on main; this is not a reviewed feature contribution. |
-| [#2 Fix ticket lifecycle, validation and persistence; add clone launcher and tests](https://github.com/mordecai12-cool/campusflow2/pull/2) | miikese | Open; no recorded partner approval | AI-assisted application and tests; personal authorship and Mordecai's review remain to be evidenced. |
+| [#2 Fix ticket lifecycle, validation and persistence; add clone launcher and tests](https://github.com/mordecai12-cool/campusflow2/pull/2) | miikese | Merged at Michael's explicit request after passing checks; no recorded partner approval | AI-assisted application and tests; publication does not establish genuine peer review. |
+| [#8 Combine actual campus source with shared CampusFlow app](https://github.com/mordecai12-cool/campusflow2/pull/8) | miikese | Actual source-folder integration and 95-test evidence published | AI-assisted transfer/adaptation at Michael's explicit merge request; no independent human review is claimed. |
+| [#9 Isolate ticket IDs and lifecycle validation](https://github.com/mordecai12-cool/campusflow2/pull/9) | miikese | Open proposal with 97 passing branch tests; partner review required before merge | Assistant-authored refactors/tests and accurate provenance; personal learning and independent contributions remain outstanding. |
 
 The PR list was verified directly: repository search omitted PR #1 even though
 it exists. Historical approval cannot be supplied after a merge and described
@@ -16,9 +18,10 @@ See [assistant review findings](review-findings.md) and
 
 Integration branch: `feat/engineer-b-integration-and-checks`, authored under
 Michael's account with explicit AI-assistance attribution. Original Mordecai
-commits are preserved. The branch is published and [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2)
-is open into main, authored by miikese. The latest main was integrated before
-publication. Partner review and merge remain pending.
+commits are preserved. [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2)
+is merged into main, authored by miikese. Merge commit:
+7fa245cf13e8567557f3dbd9e5cdec8aa9b38b18. Michael explicitly requested
+publication after successful checks; no partner approval is claimed.
 The PR title and body are also recorded in [pr-draft.md](pr-draft.md).
 
 ## Create a pull request yourself
@@ -52,7 +55,7 @@ git push -u origin feat/your-change
 
 ## Real review and contribution evidence
 
-Partner approval and cross-review are pending. Do not paste invented findings
+Genuine partner approval and cross-review remain incomplete. Do not paste invented findings
 or approvals. Record each person's actual PR, meaningful changes, tests and
 learning evidence. An AI-generated commit is not proof of independent work.
 

@@ -3,17 +3,24 @@
 Run from the project root with Python 3.10+; no packages need installing.
 
 ```sh
-python3 -m unittest discover -s tests -v
-python3 -m compileall -q main.py run.py campusflow tests
+python3 -m unittest discover -s . -t . -v
+python3 -m compileall -q main.py run.py campusflow engineer_a engineer_b tests
 python3 run.py --demo
 ```
 
-Expected: 66 tests and OK; the demo ends with Demo assertions passed.
+Expected on the refactor branch: 97 tests and OK; the demo ends with Demo assertions passed.
+Published main remains at 95 tests until the reviewed refactor is merged.
+See [actual refactor results](refactor-test-output.txt).
 Tests and demo use temporary storage and do not overwrite saved tickets.
-These results currently apply to PR #2's integration branch. Current main
-passes 15 existing tests but fails five additional requirement probes. See
+The full command includes both engineer folders and the existing shared suite.
+PR #2 has been merged at Michael's request; its merged main passed 66 tests.
+The earlier baseline main passed 15 existing tests but failed five additional
+requirement probes. Historical evidence is retained in
 [main test output](main-test-output.txt), [main contract checks](main-contract-checks.txt)
 and [integration contract checks](integration-contract-checks.txt).
+See [source integration test output](source-integration-test-output.txt) for
+the 95-test combined implementation. Final merged-main verification is also
+published in the source-integration PR discussion and GitHub Actions.
 
 Run the additional probes against a checkout without editing its records:
 
@@ -31,6 +38,8 @@ Run each responsibility separately:
 python3 -m unittest tests.test_tickets -v
 python3 -m unittest tests.test_workflow tests.test_reports -v
 python3 -m unittest tests.test_storage tests.test_cli -v
+python3 -m unittest engineer_a.tests.test_tickets engineer_b.tests.test_workflow -v
+python3 -m unittest tests.test_ownership_integration -v
 ```
 
 ## Required scenarios and regression coverage

@@ -1,0 +1,30 @@
+Command: python3 run.py --demo
+Source snapshot: af1f19a2071d566c2e29eacb9d885101f9b506f5
+Executor: AI assistant
+Exit status: 0
+
+CampusFlow demonstration — temporary data, no changes to your saved tickets
+Created T001: high + 12 → critical
+Created T002: high + 2 → high
+Created T003: low + 4 → medium
+Created T004: low + 1 → low
+Boundary: high + 9 → high
+Boundary: high + 10 → critical
+Rejected zero users: Affected users must be a positive integer (not a Boolean or decimal).
+Ticket count unchanged: 4
+Rejected unassigned transition: Assign the ticket to a staff member before starting work.
+T002 remains open.
+Assigned ticket: {'id': 'T001', 'title': 'Campus Wi-Fi is down', 'category': 'Network', 'urgency': 'high', 'affected_users': 12, 'priority': 'critical', 'status': 'open', 'assigned_to': 'Demo Staff'}
+T001 → in_progress
+T001 → resolved
+Resolved edit rejected: Resolved tickets cannot be reassigned. Reopen the resolved ticket first.
+Open queue:
+  T002: high
+  T003: medium
+  T004: low
+Numeric tie-break: T002, T010, T1000
+Report: {'total': 4, 'by_status': {'open': 3, 'in_progress': 0, 'resolved': 1}, 'by_priority': {'critical': 1, 'high': 1, 'medium': 1, 'low': 1}}
+JSON restart reload: 4 tickets preserved, including assignment and status.
+Created after reload: T005 (unique)
+Explicit reopening: T001 → open; staff assignment retained.
+Demo assertions passed. Run unittest separately for automated test evidence.

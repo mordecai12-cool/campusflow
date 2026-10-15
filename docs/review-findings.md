@@ -47,6 +47,8 @@ seven contract probes, syntax checks and the temporary-data demo successfully.
 Mordecai should independently check this behavior and the changed public error
 contract before approval.
 
-PR #2 is AI-assisted and authored by miikese. The assistant cannot submit
-Mordecai's personal review through Michael's connection, nor can Michael
-approve his own PR. Genuine partner observations and approval are pending.
+PR #2 is AI-assisted and authored by miikese. It was subsequently merged at
+Michael's explicit request as 7fa245cf13e8567557f3dbd9e5cdec8aa9b38b18.
+No partner approval was recorded. The assistant cannot submit Mordecai's
+personal review through Michael's connection or describe publication as
+peer approval. Genuine partner review evidence remains incomplete.

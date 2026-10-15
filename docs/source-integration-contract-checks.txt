@@ -1,0 +1,12 @@
+Source commit: afa2afd97fe3cf14550683ecde9bd5f1058e12ee
+Executor: AI assistant
+Exit status: 0
+
+PASS: resolved reassignment rejects without mutation
+PASS: backward transition rejects without mutation
+PASS: IDs after gaps remain unique
+PASS: Boolean count rejected without mutation
+PASS: non-array JSON rejected without overwriting
+PASS: queue uses numeric ID ordering
+PASS: empty report includes all zero counts
+7/7 contract probes passed

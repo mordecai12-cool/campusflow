@@ -99,3 +99,29 @@ The guide requires discussion before implementing features. A later review
 can document current agreement, but must not be backdated as an earlier
 discussion. The assistant asked for the fellows' actual decisions in chat;
 no response has been received at the time of this update.
+
+## Combining the actual campus source with this repository
+
+The engineer_a and engineer_b folders are copied from Michael's local campus
+working tree with matching tests. main.py directly imports those modules;
+storage uses Engineer A's validation. The older campusflow public API is
+retained through adapters: creation keeps the list-last signature and
+record-based status/reopen calls wrap the supplied record in a one-item list.
+Both APIs therefore operate on the same dictionary records without duplicate
+business implementations. Reports and queue use Engineer B's functions.
+The mixed-API integration test verifies lifecycle, reports and JSON reload.
+See source-integration.md for provenance and copied-file hashes.
+
+## Proposed refactor for partner review
+
+Ticket creation delegates ID calculation to _next_ticket_id after title,
+category, urgency and affected-user validation. It still appends only after
+all checks pass. The helper reads the highest stored numeric ID and holds no
+allocation state, so failed creation after reload does not consume an ID.
+
+Workflow normalizes the target and finds the stored ticket, then delegates
+all lifecycle and assignment prerequisites to _validate_transition before
+mutating status. Reopening remains a separate explicit operation. Both public
+interfaces retain their existing behavior. The two new regression scenarios
+passed before the refactor, and all 97 tests passed after it.
+These are implemented choices for review, not a signed human agreement.

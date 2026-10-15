@@ -3,10 +3,10 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from .reports import generate_report, get_queue
+from engineer_b.reports import generate_report
 from .storage import load_tickets, save_tickets
-from .tickets import _find_record, calculate_priority, create_ticket, find_ticket
-from .workflow import assign_ticket, reopen_ticket, update_status
+from engineer_a.tickets import calculate_priority, create_ticket, find_ticket
+from engineer_b.workflow import assign_ticket, reopen_ticket, update_status, work_queue
 
 
 def run_demo():
@@ -18,19 +18,19 @@ def run_demo():
         ("Development environment issue", "Software", "low", 4),
         ("Learning platform question", "Other", "low", 1),
     ):
-        ticket = create_ticket(title, category, urgency, count, tickets)
+        ticket = create_ticket(tickets, title, category, urgency, count)
         print(f"Created {ticket['id']}: {urgency} + {count} → {ticket['priority']}")
     for count in (9, 10):
         print(f"Boundary: high + {count} → {calculate_priority('high', count)}")
     before = len(tickets)
     try:
-        create_ticket("Invalid count", "Other", "low", 0, tickets)
+        create_ticket(tickets, "Invalid count", "Other", "low", 0)
     except ValueError as error:
         print(f"Rejected zero users: {error}")
     assert len(tickets) == before
     print(f"Ticket count unchanged: {len(tickets)}")
     try:
-        update_status(_find_record(tickets, "T002"), "in_progress")
+        update_status(tickets, "T002", "in_progress")
     except ValueError as error:
         print(f"Rejected unassigned transition: {error}")
     assert find_ticket(tickets, "T002")["status"] == "open"
@@ -38,20 +38,20 @@ def run_demo():
     assign_ticket(tickets, "T001", "Demo Staff")
     print(f"Assigned ticket: {find_ticket(tickets, 'T001')}")
     for status in ("in_progress", "resolved"):
-        update_status(_find_record(tickets, "T001"), status)
+        update_status(tickets, "T001", status)
         print(f"T001 → {status}")
     try:
         assign_ticket(tickets, "T001", "Another Staff")
     except ValueError as error:
         print(f"Resolved edit rejected: {error}")
     print("Open queue:")
-    for ticket in get_queue(tickets):
+    for ticket in work_queue(tickets):
         print(f"  {ticket['id']}: {ticket['priority']}")
     ties = []
     for identifier in ("T1000", "T010", "T002"):
-        create_ticket("Numeric queue example", "Other", "high", 2, ties)
+        create_ticket(ties, "Numeric queue example", "Other", "high", 2)
         ties[-1]["id"] = identifier
-    print("Numeric tie-break:", ", ".join(t["id"] for t in get_queue(ties)))
+    print("Numeric tie-break:", ", ".join(t["id"] for t in work_queue(ties)))
     report = generate_report(tickets)
     print("Report:", report)
     assert sum(report["by_status"].values()) == report["total"]
@@ -62,10 +62,10 @@ def run_demo():
         loaded = load_tickets(path)
         assert loaded == tickets
         print(f"JSON restart reload: {len(loaded)} tickets preserved, including assignment and status.")
-        new_ticket = create_ticket("After restart", "Software", "medium", 1, loaded)
+        new_ticket = create_ticket(loaded, "After restart", "Software", "medium", 1)
         assert new_ticket["id"] == "T005"
         print(f"Created after reload: {new_ticket['id']} (unique)")
-        reopen_ticket(_find_record(loaded, "T001"))
+        reopen_ticket(loaded, "T001")
         print("Explicit reopening: T001 → open; staff assignment retained.")
     print("Demo assertions passed. Run unittest separately for automated test evidence.")
     return 0

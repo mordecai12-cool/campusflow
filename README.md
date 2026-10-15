@@ -13,12 +13,6 @@ python3 run.py
 ```
 
 On Windows use `py -3 run.py`. `python3 main.py` is also supported.
-If these changes are still in a pull request, check out its branch first:
-
-```sh
-git switch feat/engineer-b-integration-and-checks
-python3 run.py
-```
 
 Run the demonstration without writing permanent ticket data:
 
@@ -29,12 +23,14 @@ python3 run.py --demo
 Run automated tests:
 
 ```sh
-python3 -m unittest discover -s tests -v
+python3 -m unittest discover -s . -t . -v
 ```
 
-66 tests cover creation, validation, assignment, lifecycle, numeric queue
+97 tests cover both projects' APIs, creation, validation, assignment, lifecycle, numeric queue
 ordering, reports, persistence, safe-save failures and real CLI flows.
-See [test evidence](docs/test-output.txt) and [demo evidence](docs/demo-output.txt).
+See [current refactor test evidence](docs/refactor-test-output.txt) and
+[demo evidence](docs/refactor-demo-output.txt). Historical source-integration
+results remain in docs/source-integration-test-output.txt.
 GitHub Actions checks tests, syntax and the demo on Python 3.10 and 3.12.
 
 ## Menu
@@ -103,14 +99,23 @@ their actual contributions and reviews.
 
 | Role | Account | Application files | Matching tests |
 | --- | --- | --- | --- |
-| Engineer A: Mordecai Otit Marvellous | mordecai12-cool | campusflow/tickets.py | tests/test_tickets.py |
-| Engineer B: Michael Emmanuel Ikese | miikese | campusflow/workflow.py, campusflow/reports.py | tests/test_workflow.py, tests/test_reports.py |
+| Engineer A: Mordecai Otit Marvellous | mordecai12-cool | engineer_a/tickets.py; campusflow/tickets.py compatibility API | engineer_a/tests/test_tickets.py; tests/test_tickets.py |
+| Engineer B: Michael Emmanuel Ikese | miikese | engineer_b/workflow.py, engineer_b/reports.py; campusflow compatibility APIs | engineer_b/tests/test_workflow.py; tests/test_workflow.py, tests/test_reports.py |
 | Shared integration | Both | main.py, run.py, campusflow/storage.py, campusflow/demo.py | tests/test_storage.py, tests/test_cli.py |
 
 ```text
 campusflow2/
 ├── run.py
 ├── main.py
+├── engineer_a/
+│   ├── tickets.py
+│   ├── tests/test_tickets.py
+│   └── engineer-a.md
+├── engineer_b/
+│   ├── workflow.py
+│   ├── reports.py
+│   ├── tests/test_workflow.py
+│   └── engineer-b.md
 ├── campusflow/
 │   ├── __init__.py
 │   ├── tickets.py
@@ -129,10 +134,18 @@ campusflow2/
 └── .github/
 ```
 
-The CLI owns one list and passes it to both feature groups. Workflow modifies
-records in that collection; storage validates and persists the same list.
-The integration changes are proposed in [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2),
-authored by miikese. Teammate review and merge remain pending.
+The CLI owns one list and directly uses the engineer modules copied from
+Michael's local campus project. The campusflow modules preserve Mordecai's
+existing argument order and record-based lifecycle API through adapters to
+those same implementations. Storage validates and persists the shared list.
+See [the actual source-file mapping](docs/source-integration.md) and
+[copied-file hashes](docs/campus-source-manifest.json).
+The original integration [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2),
+authored by miikese, was merged at Michael's explicit request after successful
+checks. No partner approval was recorded; this publication does not complete
+the guide's review requirement.
+The actual campus source folders and shared API integration are recorded in
+[PR #8](https://github.com/mordecai12-cool/campusflow2/pull/8).
 Mordecai authored [PR #1](https://github.com/mordecai12-cool/campusflow2/pull/1),
 which is already merged. Its diff removes tracked Python cache files; the
 application and tests were already on main. No reviews were recorded before
@@ -158,3 +171,10 @@ and technical defence. Two PR URLs alone do not establish those requirements.
 Track outstanding evidence in [the checklist](docs/submission-checklist.md)
 and [learning log](docs/ai-learning-log.md). Do not claim review or approval
 before your teammate supplies it.
+
+The follow-up refactor isolates ID calculation and transition validation,
+with tests for failed creation after reload and a second lifecycle after
+reopening. It is AI-assisted work proposed for genuine partner review.
+Proposal: [PR #9](https://github.com/mordecai12-cool/campusflow2/pull/9).
+See [review and merge checklist](docs/review-ready.md) and
+[contribution provenance](docs/contribution-provenance.md).

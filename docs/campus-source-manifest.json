@@ -1,0 +1,107 @@
+{
+  "source_workspace": "/home/student/campus",
+  "source_state": "Actual working-tree files, including uncommitted ownership reorganization and report refactor; source workspace left unchanged.",
+  "authorship": "AI-authored or AI-assisted source; folder names do not establish personal human contribution.",
+  "files": [
+    {
+      "source": "engineer_a/__init__.py",
+      "destination": "engineer_a/__init__.py",
+      "source_sha256": "a4578cb3942ea253e08c69f6110efcd1fa06beaf9c75b20e4deea1212c333a14",
+      "destination_sha256": "a4578cb3942ea253e08c69f6110efcd1fa06beaf9c75b20e4deea1212c333a14",
+      "adapted": false
+    },
+    {
+      "source": "engineer_a/tickets.py",
+      "destination": "engineer_a/tickets.py",
+      "source_sha256": "9a08ce5edfc72f131cdcbda9f935253185795db031405c0926569c65600a2cc3",
+      "destination_sha256": "9a08ce5edfc72f131cdcbda9f935253185795db031405c0926569c65600a2cc3",
+      "adapted": false
+    },
+    {
+      "source": "engineer_a/tests/__init__.py",
+      "destination": "engineer_a/tests/__init__.py",
+      "source_sha256": "76960f37c4bb9f5ed930c364893bed7342a3d8563e67e91a65c384029372af72",
+      "destination_sha256": "76960f37c4bb9f5ed930c364893bed7342a3d8563e67e91a65c384029372af72",
+      "adapted": false
+    },
+    {
+      "source": "engineer_a/tests/test_tickets.py",
+      "destination": "engineer_a/tests/test_tickets.py",
+      "source_sha256": "780a67c6b503a22116207a8798655faca025c2ad74e59929bf4922ec9ac74bad",
+      "destination_sha256": "780a67c6b503a22116207a8798655faca025c2ad74e59929bf4922ec9ac74bad",
+      "adapted": false
+    },
+    {
+      "source": "engineer_a/engineer-a.md",
+      "destination": "engineer_a/engineer-a.md",
+      "source_sha256": "f01621c4ac0a55beca0733bebe252c39e5cbc7c1315f7d1dcc8b3a8cd8e01dea",
+      "destination_sha256": "f01621c4ac0a55beca0733bebe252c39e5cbc7c1315f7d1dcc8b3a8cd8e01dea",
+      "adapted": false
+    },
+    {
+      "source": "engineer_b/__init__.py",
+      "destination": "engineer_b/__init__.py",
+      "source_sha256": "008e7fb96fcc108c91aadfe8ef0dbcb1c159fed79116a762a108b983bc071dbe",
+      "destination_sha256": "008e7fb96fcc108c91aadfe8ef0dbcb1c159fed79116a762a108b983bc071dbe",
+      "adapted": false
+    },
+    {
+      "source": "engineer_b/workflow.py",
+      "destination": "engineer_b/workflow.py",
+      "source_sha256": "607dba2e974c6097aedc63e23a4a6b2b6d1a401649c306b86b464c286cb80ff2",
+      "destination_sha256": "7e7cf5639b6df1e5aa0b92114b049e8b336e353b5a306e3ea572391bea431747",
+      "adapted": true
+    },
+    {
+      "source": "engineer_b/reports.py",
+      "destination": "engineer_b/reports.py",
+      "source_sha256": "33057f6ca92fc70e6934fcaec06b110f3c198a20f960947850510a0ae62ab65f",
+      "destination_sha256": "33057f6ca92fc70e6934fcaec06b110f3c198a20f960947850510a0ae62ab65f",
+      "adapted": false
+    },
+    {
+      "source": "engineer_b/tests/__init__.py",
+      "destination": "engineer_b/tests/__init__.py",
+      "source_sha256": "dbc1b98b508b6274deaa4771ab2d2a17bc45c278e6027bb887032b17ee5e16a6",
+      "destination_sha256": "dbc1b98b508b6274deaa4771ab2d2a17bc45c278e6027bb887032b17ee5e16a6",
+      "adapted": false
+    },
+    {
+      "source": "engineer_b/tests/test_workflow.py",
+      "destination": "engineer_b/tests/test_workflow.py",
+      "source_sha256": "80c832b864d30e67fda3eea4add49b74c7d8cb10ca2ceb8000db4e3fff91d5e0",
+      "destination_sha256": "80c832b864d30e67fda3eea4add49b74c7d8cb10ca2ceb8000db4e3fff91d5e0",
+      "adapted": false
+    },
+    {
+      "source": "engineer_b/engineer-b.md",
+      "destination": "engineer_b/engineer-b.md",
+      "source_sha256": "eab9c1f0e1775ee43d878ebcdab64e65055dc70278e303371da02f2c6938dab5",
+      "destination_sha256": "24bccf924047772ee15f291aca73f86b8149a0876fff2000256091fbd3183baa",
+      "adapted": true
+    },
+    {
+      "source": "main.py",
+      "destination": "main.py",
+      "source_sha256": "f6d88c07e6ed9467d56483603ed9ebd19531562d1125fda490573b0486fbdd35",
+      "destination_sha256": "f6d88c07e6ed9467d56483603ed9ebd19531562d1125fda490573b0486fbdd35",
+      "adapted": false
+    },
+    {
+      "source": "campusflow/storage.py",
+      "destination": "campusflow/storage.py",
+      "source_sha256": "51fdff86e368c59a638d38fba1130e75c7405b010a4f8f1f90afe993c3a29dec",
+      "destination_sha256": "620f579e13478f49c7f4f5f96959bfee838246965be46dfbe82860aea45ec0c4",
+      "adapted": true
+    },
+    {
+      "source": "campusflow/demo.py",
+      "destination": "campusflow/demo.py",
+      "source_sha256": "5d696da02e2417633f2abc0b53fd57e068d5895dd54776eab92d84f037563559",
+      "destination_sha256": "5d696da02e2417633f2abc0b53fd57e068d5895dd54776eab92d84f037563559",
+      "adapted": false
+    }
+  ],
+  "snapshot_commit": "afa2afd97fe3cf14550683ecde9bd5f1058e12ee",
+  "hash_scope": "Import-time source and destination files. Subsequent refactors are tracked in Git; these historical hashes are not current-file checksums."
+}
