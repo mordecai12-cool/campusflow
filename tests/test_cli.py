@@ -48,7 +48,7 @@ class CliTests(unittest.TestCase):
         self.assertFalse(self.path.exists())
 
     def test_invalid_choices_loop_until_exit(self):
-        result = self.run_menu("hello\n10\n-1\n\n0\n")
+        result = self.run_menu("hello\n13\n-1\n\n0\n")
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(result.stdout.count("Invalid choice."), 4)
         self.assertIn("Goodbye", result.stdout)
@@ -58,6 +58,32 @@ class CliTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("Goodbye", result.stdout)
         self.assertEqual(result.stderr, "")
+
+    def test_search_and_filter_use_loaded_tickets(self):
+        inputs = (
+            "1\nWi-Fi down\nNetwork\nhigh\n12\n"
+            "10\nWi-Fi\n"
+            "11\nNetwork\nopen\ncritical\n"
+            "0\n"
+        )
+        result = self.run_menu(inputs)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+        ticket_line = "T001 | critical | open | Wi-Fi down | unassigned"
+        self.assertEqual(result.stdout.count(ticket_line), 2)
+
+    def test_quiz_menu_option_runs_quiz(self):
+        output = StringIO()
+        with (
+            patch("builtins.input", side_effect=["12", "0"]),
+            patch("main.run_quiz") as quiz,
+            redirect_stdout(output),
+        ):
+            status = run_menu(self.path)
+
+        self.assertEqual(status, 0)
+        quiz.assert_called_once_with()
+        self.assertIn("12. Engineering Understanding Check", output.getvalue())
 
     def test_empty_views_reports_and_unknown_id(self):
         result = self.run_menu("2\n7\n8\n3\nT999\n0\n")
