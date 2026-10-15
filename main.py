@@ -4,10 +4,12 @@ import argparse
 from pathlib import Path
 import re
 
-from engineer_b.reports import generate_report
-from campusflow.storage import StorageError, load_tickets, save_tickets
 from engineer_a.tickets import create_ticket, find_ticket, list_tickets
 from engineer_b.workflow import assign_ticket, reopen_ticket, update_status, work_queue
+from engineer_b.reports import generate_report
+from campusflow.storage import StorageError, load_tickets, save_tickets
+from campusflow.search import filter_tickets, search_tickets
+from campusflow.quiz import run_quiz
 
 
 DEFAULT_DATA = Path(__file__).resolve().parent / "data" / "tickets.json"
@@ -25,6 +27,9 @@ MENU = """
 7. View Work Queue
 8. Generate Reports
 9. Save Tickets
+10. Search Tickets
+11. Filter Tickets
+12. Engineering Understanding Check
 0. Exit
 """
 
@@ -116,8 +121,26 @@ def run_menu(data_path):
             elif choice == "9":
                 save_changes()
                 dirty = False
+            elif choice == "10":
+                search_text = input("Enter a title or part of a title: ")
+                results = search_tickets(tickets, search_text)
+                display_collection(results, "No matching tickets found.")
+            elif choice == "11":
+                print("Leave a field empty to ignore that filter.")
+                category = input("Category (Network/Hardware/Software/Other): ").strip()
+                status = input("Status (open/in_progress/resolved): ").strip()
+                priority = input("Priority (critical/high/medium/low): ").strip()
+                results = filter_tickets(
+                    tickets,
+                    category=category or None,
+                    status=status or None,
+                    priority=priority or None,
+                )
+                display_collection(results, "No tickets match those filters.")
+            elif choice == "12":
+                run_quiz()
             else:
-                print("Invalid choice. Enter a number from 0 to 9.")
+                print("Invalid choice. Enter a number from 0 to 12.")
         except (EOFError, KeyboardInterrupt):
             print("\nInput ended.")
             if dirty:
