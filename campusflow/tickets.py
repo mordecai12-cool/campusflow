@@ -20,7 +20,6 @@ from engineer_a.tickets import (
 )
 from engineer_b.workflow import assign_ticket
 
-
 def create_ticket(*args):
     """Support both the original and shared API argument orders.
 
@@ -31,9 +30,7 @@ def create_ticket(*args):
         create_ticket(tickets, title, category, urgency, affected_users)
     """
     if len(args) != 5:
-        raise TypeError(
-            "create_ticket expects 5 arguments."
-        )
+        raise TypeError("create_ticket expects 5 arguments.")
 
     if isinstance(args[0], list):
         tickets, title, category, urgency, affected_users = args
@@ -47,7 +44,6 @@ def create_ticket(*args):
         urgency,
         affected_users,
     )
-
 
 def validate_title(title):
     """Validate and return a trimmed title."""

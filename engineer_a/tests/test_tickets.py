@@ -47,7 +47,7 @@ class TicketTests(unittest.TestCase):
     def test_creation_has_exact_fields_and_initial_state(self):
         ticket = create_ticket(self.tickets, " Wi-Fi down ", " nEtWoRk ", " HIGH ", 15)
         self.assertEqual(ticket, {
-            "id": "T001", "title": "Wi-Fi down", "category": "Network",
+            "id": "T001", "title": "Wi-Fi down", "notes": [], "category": "Network",
             "urgency": "high", "affected_users": 15, "priority": "critical",
             "status": "open", "assigned_to": None,
         })
