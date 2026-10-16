@@ -18,7 +18,22 @@ from engineer_a.tickets import (
     validate_records,
     add_note,
 )
-from engineer_b.workflow import assign_ticket
+from engineer_b.workflow import assign_ticket as _assign_ticket
+
+# Compatibility copies created by the legacy API.
+_compat_created_records = {}
+
+
+def assign_ticket(tickets, ticket_id, staff_name):
+    """Assign a ticket and synchronize its compatibility copy."""
+    result = _assign_ticket(tickets, ticket_id, staff_name)
+
+    for reference, _tickets in _compat_created_records.get(result["id"], []):
+        if _tickets is tickets:
+            reference["assigned_to"] = result["assigned_to"]
+
+    return result.copy()
+
 
 def create_ticket(*args):
     """Support both the original and shared API argument orders.
@@ -37,13 +52,17 @@ def create_ticket(*args):
     else:
         title, category, urgency, affected_users, tickets = args
 
-    return _create_ticket(
+    result = _create_ticket(
         tickets,
         title,
         category,
         urgency,
         affected_users,
     )
+
+    returned = result.copy()
+    _compat_created_records[result["id"]] = [(returned, tickets)]
+    return returned
 
 def validate_title(title):
     """Validate and return a trimmed title."""

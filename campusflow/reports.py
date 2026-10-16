@@ -1,6 +1,6 @@
 """Compatibility queue and report API backed by Engineer B's source."""
 
-from engineer_b.reports import generate_report
+from engineer_b.reports import generate_detailed_report, generate_report
 from engineer_b.workflow import work_queue
 
 
