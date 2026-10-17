@@ -63,6 +63,58 @@ def ask_count():
     return int(raw)
 
 
+def search_menu(tickets):
+    """Search all ticket details, let the user choose a result, or return."""
+    while True:
+        search_text = input(
+            "Enter text to search (or 0 to return to the main menu): "
+        ).strip()
+
+        if search_text == "0":
+            return
+
+        if not search_text:
+            print("Please enter a search term, or enter 0 to return to the main menu.")
+            continue
+
+        results = search_tickets(tickets, search_text)
+
+        if not results:
+            print(f"No tickets matched '{search_text}'. Try another search or enter 0 to return.")
+            continue
+
+        print(f"Found {len(results)} matching ticket(s):")
+        for number, ticket in enumerate(results, start=1):
+            staff = ticket.get("assigned_to") or "unassigned"
+            print(
+                f"{number}. {ticket.get('id', 'Unknown ID')} | "
+                f"{ticket.get('priority', 'unknown')} | "
+                f"{ticket.get('status', 'unknown')} | "
+                f"{ticket.get('title', '')} | {staff}"
+            )
+
+        while True:
+            selection = input(
+                "Enter a result number to view details, press Enter to search again, "
+                "or enter 0 to return to the main menu: "
+            ).strip()
+
+            if selection == "0":
+                return
+
+            if selection == "":
+                break
+
+            if selection.isdigit() and 1 <= int(selection) <= len(results):
+                display_ticket(results[int(selection) - 1])
+                break
+
+            print(
+                f"Invalid selection. Enter a number from 1 to {len(results)}, "
+                "press Enter to search again, or enter 0 to return to the main menu."
+            )
+
+
 def run_menu(data_path):
     try:
         tickets = load_tickets(data_path)
@@ -122,9 +174,7 @@ def run_menu(data_path):
                 save_changes()
                 dirty = False
             elif choice == "10":
-                search_text = input("Enter a title or part of a title: ")
-                results = search_tickets(tickets, search_text)
-                display_collection(results, "No matching tickets found.")
+                search_menu(tickets)
             elif choice == "11":
                 print("Leave a field empty to ignore that filter.")
                 category = input("Category (Network/Hardware/Software/Other): ").strip()

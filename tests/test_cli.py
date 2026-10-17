@@ -62,7 +62,7 @@ class CliTests(unittest.TestCase):
     def test_search_and_filter_use_loaded_tickets(self):
         inputs = (
             "1\nWi-Fi down\nNetwork\nhigh\n12\n"
-            "10\nWi-Fi\n"
+            "10\nWi-Fi\n1\n0\n"
             "11\nNetwork\nopen\ncritical\n"
             "0\n"
         )
@@ -71,6 +71,49 @@ class CliTests(unittest.TestCase):
 
         ticket_line = "T001 | critical | open | Wi-Fi down | unassigned"
         self.assertEqual(result.stdout.count(ticket_line), 2)
+
+    def test_search_retries_after_no_match_and_returns_to_menu(self):
+        inputs = (
+            "1\nWi-Fi down\nNetwork\nhigh\n12\n"
+            "10\nno-ticket-matches-this\nNetwork\n1\n0\n"
+        )
+        result = self.run_menu(inputs)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("No tickets matched 'no-ticket-matches-this'", result.stdout)
+        self.assertIn("Found 1 matching ticket(s)", result.stdout)
+        self.assertIn("Ticket T001", result.stdout)
+        self.assertIn("Goodbye.", result.stdout)
+
+    def test_search_shows_multiple_results_and_allows_selection(self):
+        inputs = (
+            "1\nWi-Fi down\nNetwork\nhigh\n12\n"
+            "1\nWi-Fi slow\nNetwork\nmedium\n3\n"
+            "10\nWi-Fi\n2\n0\n0\n"
+        )
+        result = self.run_menu(inputs)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Found 2 matching ticket(s)", result.stdout)
+        self.assertIn("1. T001", result.stdout)
+        self.assertIn("2. T002", result.stdout)
+        self.assertIn("Ticket T002", result.stdout)
+        self.assertIn("Goodbye.", result.stdout)
+
+    def test_search_invalid_selection_can_be_corrected(self):
+        inputs = (
+            "1\nWi-Fi down\nNetwork\nhigh\n12\n"
+            "10\nWi-Fi\n99\n1\n0\n0\n"
+        )
+        result = self.run_menu(inputs)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Invalid selection.", result.stdout)
+        self.assertIn("Ticket T001", result.stdout)
+        self.assertIn("Goodbye.", result.stdout)
+
+    def test_search_zero_returns_to_main_menu(self):
+        result = self.run_menu("10\n0\n0\n")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("10. Search Tickets", result.stdout)
+        self.assertIn("Goodbye.", result.stdout)
 
     def test_quiz_menu_option_runs_quiz(self):
         output = StringIO()

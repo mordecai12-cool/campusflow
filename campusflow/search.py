@@ -1,6 +1,6 @@
 def search_tickets(tickets, search_text):
-    """Find tickets whose titles contain the search text, ignoring case."""
-    search_text = search_text.strip().casefold()
+    """Find tickets containing the search text anywhere in their details."""
+    search_text = str(search_text or "").strip().casefold()
 
     if not search_text:
         return []
@@ -8,9 +8,10 @@ def search_tickets(tickets, search_text):
     matches = []
 
     for ticket in tickets:
-        title = ticket.get("title", "")
-
-        if search_text in title.casefold():
+        # Searching the complete record includes IDs, titles, notes, category,
+        # urgency, affected users, priority, status, assigned staff and other
+        # fields, including values stored inside lists or dictionaries.
+        if search_text in str(ticket).casefold():
             matches.append(ticket)
 
     return matches
