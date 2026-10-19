@@ -2,8 +2,8 @@
 
 python3 -m unittest discover -s tests -v
 
-* 67 tests ran
-* 67 passed
+* 112 tests ran
+* 112 passed
 * 0 failures
 * 0 errors
 
