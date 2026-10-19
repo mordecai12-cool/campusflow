@@ -52,16 +52,6 @@ The assistant inspected the repository, reproduced validation and workflow issue
 
 Previous assistant execution records may contain references to earlier team members or earlier versions of the project. Those records should not be interpreted as current team attribution.
 
-## Individual Evidence
-
-Engineer A's current verified evidence includes the resolved-ticket note verification documented above.
-
-The earlier Interaction 1–3 entries were preserved from the repository and should only be presented as completed assessment evidence if their original prompts and independent experiments can be verified.
-
-Engineer B — Ina Isah must provide and document her own required learning evidence separately.
-
-No personal experiments, prompts, reviews or agreements have been invented for Engineer B.
-
 ## Current Team
 
 - **Engineer A — Mordecai Otit Marvellous**
