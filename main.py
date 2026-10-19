@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 import re
 
-from engineer_a.tickets import create_ticket, find_ticket, list_tickets
+from engineer_a.tickets import create_ticket, find_ticket, list_tickets, add_note
 from engineer_b.workflow import assign_ticket, reopen_ticket, update_status, work_queue
 from engineer_b.reports import generate_report
 from campusflow.storage import StorageError, load_tickets, save_tickets
@@ -30,6 +30,7 @@ MENU = """
 10. Search Tickets
 11. Filter Tickets
 12. Engineering Understanding Check
+13. Add Note to Ticket
 0. Exit
 """
 
@@ -189,8 +190,15 @@ def run_menu(data_path):
                 display_collection(results, "No tickets match those filters.")
             elif choice == "12":
                 run_quiz()
+            elif choice == "13":
+                ticket_id = input("Ticket ID: ").strip()
+                author = input("Your name: ").strip()
+                message = input("Note (5-300 characters): ").strip()
+                note = add_note(tickets, ticket_id, author, message)
+                dirty = True
+                print(f"Note {note['note_id']} added to ticket {ticket_id}.")
             else:
-                print("Invalid choice. Enter a number from 0 to 12.")
+                print("Invalid choice. Enter a number from 0 to 13.")
         except (EOFError, KeyboardInterrupt):
             print("\nInput ended.")
             if dirty:

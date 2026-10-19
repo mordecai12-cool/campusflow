@@ -48,7 +48,7 @@ class CliTests(unittest.TestCase):
         self.assertFalse(self.path.exists())
 
     def test_invalid_choices_loop_until_exit(self):
-        result = self.run_menu("hello\n13\n-1\n\n0\n")
+        result = self.run_menu("hello\n14\n-1\n\n0\n")
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(result.stdout.count("Invalid choice."), 4)
         self.assertIn("Goodbye", result.stdout)
